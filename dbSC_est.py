@@ -20,7 +20,7 @@ def mk_sc_est():
 			objc = row['COD SETOR']
 			cod_material = row['COD']
 			qtd = row['QTD SOL']
-			just = f'SOLICITADO POR: {row['SOLICITANTE']} // APROVADO POR: HUGO OKAHARA // APLICAÇÃO: {row['DESCRIÇÃO SERVIÇOS']}'
+			just = f'SOLICITADO POR: {row['SOLICITANTE']} // APROVADO POR: {} // APLICAÇÃO: {row['DESCRIÇÃO SERVIÇOS']}'
 			if row['OBSERVAÇÃO'] == 0:
 				inf_forn = ''
 			else:
