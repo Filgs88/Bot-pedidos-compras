@@ -3,7 +3,7 @@ import pandas as pd, datetime
 
 def mk_sc_est():
 
-	engine = create_engine('oracle://cscliente:X4ap968qk7#yXT6HkYvn@168.194.255.144:1521/cs0084p')
+	engine = create_engine('driver://user:pwd@ip:port/hostname')
 	con = engine.connect()
 
 	# Definir a data
@@ -27,12 +27,12 @@ def mk_sc_est():
 				inf_forn = row['OBSERVAÇÃO']
 
 			# Gera o numero de solicitação
-			novo = con.execute(text("select max(nr_solicitacao)+1 from material.solicitacaocompra"))
+			novo = con.execute(text("select max(nr_solicitacao)+1 from table"))
 			newsc = novo.all()[0][0]
 			print(newsc)
 
 			sql = f"""
-			insert into material.solicitacaocompra(
+			insert into table(
 			NR_SOLICITACAO,
 			COD_GRUPOEMPRESA,
 			COD_GRUPOEMPRESA_DESTINO,
