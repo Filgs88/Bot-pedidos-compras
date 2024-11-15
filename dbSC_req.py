@@ -3,7 +3,7 @@ import datetime, pandas as pd
 
 def mk_sc_req():
 
-	engine = create_engine('oracle://cscliente:X4ap968qk7#yXT6HkYvn@168.194.255.144:1521/cs0084p')
+	engine = create_engine('driver://user:pwd@ip:port/hostname')
 	con = engine.connect()
 
 	# Definir a data
@@ -12,12 +12,12 @@ def mk_sc_req():
 
 
 	# Definir numero de requisição
-	novo = con.execute(text("select max(nrrequisicao)+1 from material.requisicaomaterial"))
+	novo = con.execute(text("select max(nrrequisicao)+1 from table"))
 	newreq = novo.all()[0][0]
 	print(newreq)
 
 	sql1 = f"""
-	insert into material.requisicaomaterial(
+	insert into table(
 	nrrequisicao,
 	cod_empresa_req, 
 	cod_filial_req, 
@@ -56,7 +56,7 @@ def mk_sc_req():
 			objc = row['COD SETOR']
 			codmaterial = row['COD']
 			qtd = row['QTD SOL']
-			just = f'SOLICITADO POR: {row['SOLICITANTE']} // APROVADO POR: HUGO OKAHARA // APLICAÇÃO: {row['DESCRIÇÃO SERVIÇOS']}'
+			just = f'SOLICITADO POR: {row['SOLICITANTE']} // APROVADO POR: {} // APLICAÇÃO: {row['DESCRIÇÃO SERVIÇOS']}'
 			if row['OBSERVAÇÃO'] == 0:
 				inf_forn = ''
 			else:
@@ -64,11 +64,11 @@ def mk_sc_req():
 			
 
 			# Gera o numero de solicitação
-			novo = con.execute(text("select max(nr_solicitacao)+1 from material.solicitacaocompra"))
+			novo = con.execute(text("select max(nr_solicitacao)+1 from table"))
 			newsc = novo.all()[0][0]
 
 			sql2 = f"""
-			insert into material.itensrequisicaomaterial(
+			insert into table(
 			NRREQUISICAO,
 			ITEM,
 			COD_MATERIAL,
